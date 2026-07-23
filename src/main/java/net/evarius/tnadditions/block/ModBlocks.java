@@ -4,10 +4,13 @@ import net.evarius.tnadditions.TerraNexusAdditions;
 import net.evarius.tnadditions.block.custom.DelineatorBlock;
 import net.evarius.tnadditions.block.custom.GuardrailBlock;
 import net.evarius.tnadditions.block.custom.OpenableManholeBlock;
+import net.evarius.tnadditions.block.custom.OxidizingGuardrailBlock;
 import net.evarius.tnadditions.block.custom.RoadFurnitureBlock;
+import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.GlazedTerracottaBlock;
+import net.minecraft.block.Oxidizable;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.item.BlockItem;
@@ -51,7 +54,11 @@ public final class ModBlocks {
     public static final Block DELINEATOR_LEFT = register("delineator_left",
             AbstractBlock.Settings.create().strength(1f).sounds(BlockSoundGroup.STONE).nonOpaque(), DelineatorBlock::new);
     public static final Block GUARDRAIL = register("guardrail",
-            AbstractBlock.Settings.create().strength(2f).requiresTool().sounds(BlockSoundGroup.METAL).nonOpaque(), GuardrailBlock::new);
+            guardrailSettings(), settings -> new OxidizingGuardrailBlock(Oxidizable.OxidationLevel.UNAFFECTED, settings));
+    public static final Block LIGHTLY_RUSTED_GUARDRAIL = register("lightly_rusted_guardrail",
+            guardrailSettings(), settings -> new OxidizingGuardrailBlock(Oxidizable.OxidationLevel.EXPOSED, settings));
+    public static final Block HEAVILY_RUSTED_GUARDRAIL = register("heavily_rusted_guardrail",
+            guardrailSettings(), settings -> new OxidizingGuardrailBlock(Oxidizable.OxidationLevel.WEATHERED, settings));
     public static final Block GUARDRAIL_END = register("guardrail_end",
             AbstractBlock.Settings.create().strength(2f).requiresTool().sounds(BlockSoundGroup.METAL).nonOpaque(), GuardrailBlock::new);
     public static final Block BRIDGE_GUARDRAIL = register("bridge_guardrail",
@@ -77,6 +84,15 @@ public final class ModBlocks {
         return AbstractBlock.Settings.create().strength(hardness, resistance).requiresTool().sounds(BlockSoundGroup.STONE);
     }
 
+    private static AbstractBlock.Settings guardrailSettings() {
+        return AbstractBlock.Settings.create()
+                .strength(2f)
+                .requiresTool()
+                .sounds(BlockSoundGroup.METAL)
+                .nonOpaque()
+                .ticksRandomly();
+    }
+
     private static Block register(String name, AbstractBlock.Settings settings) {
         return register(name, settings, Block::new);
     }
@@ -92,6 +108,8 @@ public final class ModBlocks {
     }
 
     public static void registerModBlocks() {
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(GUARDRAIL, LIGHTLY_RUSTED_GUARDRAIL);
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(LIGHTLY_RUSTED_GUARDRAIL, HEAVILY_RUSTED_GUARDRAIL);
         TerraNexusAdditions.LOGGER.info("Registering road construction blocks under legacy namespace {}", LEGACY_NAMESPACE);
     }
 

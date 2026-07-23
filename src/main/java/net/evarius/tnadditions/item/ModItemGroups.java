@@ -35,6 +35,8 @@ public final class ModItemGroups {
                         entries.add(ModBlocks.DELINEATOR);
                         entries.add(ModBlocks.DELINEATOR_LEFT);
                         entries.add(ModBlocks.GUARDRAIL);
+                        entries.add(ModBlocks.LIGHTLY_RUSTED_GUARDRAIL);
+                        entries.add(ModBlocks.HEAVILY_RUSTED_GUARDRAIL);
                         entries.add(ModBlocks.GUARDRAIL_END);
                         entries.add(ModBlocks.BRIDGE_GUARDRAIL);
                         entries.add(ModBlocks.BRIDGE_CONCRETE);

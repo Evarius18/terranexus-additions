@@ -1,6 +1,7 @@
 package net.evarius.tnadditions;
 
 import net.evarius.tnadditions.block.ModBlocks;
+import net.evarius.tnadditions.config.GuardrailOxidationConfig;
 import net.evarius.tnadditions.item.ModItemGroups;
 import net.fabricmc.api.ModInitializer;
 
@@ -19,6 +20,7 @@ public class TerraNexusAdditions implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		GuardrailOxidationConfig.load();
 		ModBlocks.registerModBlocks();
 		ModItemGroups.registerItemGroups();
 		LOGGER.info("TerraNexus road construction additions initialized");
