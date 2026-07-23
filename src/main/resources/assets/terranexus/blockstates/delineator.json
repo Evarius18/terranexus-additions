@@ -1,0 +1,1 @@
+﻿{"variants":{"facing=north":{"model":"terranexus:block/road_furniture/delineator"},"facing=east":{"model":"terranexus:block/road_furniture/delineator","y":90},"facing=south":{"model":"terranexus:block/road_furniture/delineator","y":180},"facing=west":{"model":"terranexus:block/road_furniture/delineator","y":270}}}

@@ -1,0 +1,27 @@
+{
+	"schemaVersion": 1,
+	"id": "tnadditions",
+	"version": "${version}",
+	"name": "TerraNexus Additions",
+	"description": "Kompatible Straßenbau-, Brücken- und Entwässerungsblöcke für TerraNexus.",
+	"authors": [
+		"Evarius"
+	],
+	"license": "CC0-1.0",
+	"icon": "assets/tnadditions/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.evarius.tnadditions.TerraNexusAdditions"
+		],
+		"client": [
+			"net.evarius.tnadditions.client.TerranexusAdditionsClient"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~1.21.8",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
