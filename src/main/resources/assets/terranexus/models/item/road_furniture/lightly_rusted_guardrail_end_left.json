@@ -1,0 +1,22 @@
+﻿{
+    "parent":  "terranexus:block/road_furniture/lightly_rusted_guardrail_end_left",
+    "display":  {
+                    "gui":  {
+                                "rotation":  [
+                                                 30,
+                                                 225,
+                                                 0
+                                             ],
+                                "translation":  [
+                                                    0,
+                                                    0,
+                                                    0
+                                                ],
+                                "scale":  [
+                                              0.625,
+                                              0.625,
+                                              0.625
+                                          ]
+                            }
+                }
+}

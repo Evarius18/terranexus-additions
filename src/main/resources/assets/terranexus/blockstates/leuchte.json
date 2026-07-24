@@ -1,0 +1,1 @@
+{"variants":{"facing=north":{"model":"terranexus:block/temporary_barriers/leuchte"},"facing=east":{"model":"terranexus:block/temporary_barriers/leuchte","y":90},"facing=south":{"model":"terranexus:block/temporary_barriers/leuchte","y":180},"facing=west":{"model":"terranexus:block/temporary_barriers/leuchte","y":270}}}

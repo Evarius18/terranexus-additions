@@ -3,9 +3,11 @@ package net.evarius.tnadditions.block;
 import net.evarius.tnadditions.TerraNexusAdditions;
 import net.evarius.tnadditions.block.custom.DelineatorBlock;
 import net.evarius.tnadditions.block.custom.GuardrailBlock;
+import net.evarius.tnadditions.block.custom.GuardrailVariant;
 import net.evarius.tnadditions.block.custom.OpenableManholeBlock;
 import net.evarius.tnadditions.block.custom.OxidizingGuardrailBlock;
 import net.evarius.tnadditions.block.custom.RoadFurnitureBlock;
+import net.evarius.tnadditions.block.custom.TemporaryBarrierBlock;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -49,16 +51,56 @@ public final class ModBlocks {
             AbstractBlock.Settings.create().strength(1.4f).sounds(BlockSoundGroup.MUD));
     public static final Block CONSTRUCTION_BARRIER = register("construction_barrier",
             AbstractBlock.Settings.create().strength(1.2f).sounds(BlockSoundGroup.WOOD).nonOpaque(), RoadFurnitureBlock::new);
+    public static final Block BARKE = register("barke",
+            temporaryBarrierSettings(), settings -> temporaryBarrier(TemporaryBarrierBlock.Profile.BARKE, settings));
+    public static final Block BARKE_FUSS = register("barke_fuss",
+            temporaryBarrierSettings(), settings -> temporaryBarrier(TemporaryBarrierBlock.Profile.BARKE_FOOT, settings));
+    public static final Block BARKE_LICHT = register("barke_licht",
+            illuminatedBarrierSettings(), settings -> temporaryBarrier(TemporaryBarrierBlock.Profile.BARKE_LIGHT, settings));
+    public static final Block BARKE_GROSS = register("barke_gross",
+            temporaryBarrierSettings(), settings -> temporaryBarrier(TemporaryBarrierBlock.Profile.LARGE_BARKE, settings));
+    public static final Block BARKE_GROSS_LICHT = register("barke_gross_licht",
+            illuminatedBarrierSettings(), settings -> temporaryBarrier(TemporaryBarrierBlock.Profile.LARGE_BARKE_LIGHT, settings));
+    public static final Block BAUZAUN = register("bauzaun",
+            temporaryBarrierSettings(), settings -> temporaryBarrier(TemporaryBarrierBlock.Profile.CONSTRUCTION_FENCE, settings));
+    public static final Block BAUZAUN_MIT_PLANE = register("bauzaun_mit_plane",
+            temporaryBarrierSettings(), settings -> temporaryBarrier(TemporaryBarrierBlock.Profile.CONSTRUCTION_FENCE, settings));
+    public static final Block LEUCHTE = register("leuchte",
+            illuminatedBarrierSettings(), settings -> temporaryBarrier(TemporaryBarrierBlock.Profile.WARNING_LIGHT, settings));
     public static final Block DELINEATOR = register("delineator",
             AbstractBlock.Settings.create().strength(1f).sounds(BlockSoundGroup.STONE).nonOpaque(), DelineatorBlock::new);
     public static final Block DELINEATOR_LEFT = register("delineator_left",
             AbstractBlock.Settings.create().strength(1f).sounds(BlockSoundGroup.STONE).nonOpaque(), DelineatorBlock::new);
     public static final Block GUARDRAIL = register("guardrail",
-            guardrailSettings(), settings -> new OxidizingGuardrailBlock(Oxidizable.OxidationLevel.UNAFFECTED, settings));
+            guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.UNAFFECTED, GuardrailVariant.STANDARD, settings));
     public static final Block LIGHTLY_RUSTED_GUARDRAIL = register("lightly_rusted_guardrail",
-            guardrailSettings(), settings -> new OxidizingGuardrailBlock(Oxidizable.OxidationLevel.EXPOSED, settings));
+            guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.EXPOSED, GuardrailVariant.STANDARD, settings));
     public static final Block HEAVILY_RUSTED_GUARDRAIL = register("heavily_rusted_guardrail",
-            guardrailSettings(), settings -> new OxidizingGuardrailBlock(Oxidizable.OxidationLevel.WEATHERED, settings));
+            guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.WEATHERED, GuardrailVariant.STANDARD, settings));
+    public static final Block GUARDRAIL_CENTER_POST = register("guardrail_center_post",
+            guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.UNAFFECTED, GuardrailVariant.CENTER_POST, settings));
+    public static final Block LIGHTLY_RUSTED_GUARDRAIL_CENTER_POST = register("lightly_rusted_guardrail_center_post",
+            guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.EXPOSED, GuardrailVariant.CENTER_POST, settings));
+    public static final Block HEAVILY_RUSTED_GUARDRAIL_CENTER_POST = register("heavily_rusted_guardrail_center_post",
+            guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.WEATHERED, GuardrailVariant.CENTER_POST, settings));
+    public static final Block GUARDRAIL_WITHOUT_POSTS = register("guardrail_without_posts",
+            guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.UNAFFECTED, GuardrailVariant.WITHOUT_POSTS, settings));
+    public static final Block LIGHTLY_RUSTED_GUARDRAIL_WITHOUT_POSTS = register("lightly_rusted_guardrail_without_posts",
+            guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.EXPOSED, GuardrailVariant.WITHOUT_POSTS, settings));
+    public static final Block HEAVILY_RUSTED_GUARDRAIL_WITHOUT_POSTS = register("heavily_rusted_guardrail_without_posts",
+            guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.WEATHERED, GuardrailVariant.WITHOUT_POSTS, settings));
+    public static final Block GUARDRAIL_END_LEFT = register("guardrail_end_left",
+            guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.UNAFFECTED, GuardrailVariant.END_LEFT, settings));
+    public static final Block LIGHTLY_RUSTED_GUARDRAIL_END_LEFT = register("lightly_rusted_guardrail_end_left",
+            guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.EXPOSED, GuardrailVariant.END_LEFT, settings));
+    public static final Block HEAVILY_RUSTED_GUARDRAIL_END_LEFT = register("heavily_rusted_guardrail_end_left",
+            guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.WEATHERED, GuardrailVariant.END_LEFT, settings));
+    public static final Block GUARDRAIL_END_RIGHT = register("guardrail_end_right",
+            guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.UNAFFECTED, GuardrailVariant.END_RIGHT, settings));
+    public static final Block LIGHTLY_RUSTED_GUARDRAIL_END_RIGHT = register("lightly_rusted_guardrail_end_right",
+            guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.EXPOSED, GuardrailVariant.END_RIGHT, settings));
+    public static final Block HEAVILY_RUSTED_GUARDRAIL_END_RIGHT = register("heavily_rusted_guardrail_end_right",
+            guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.WEATHERED, GuardrailVariant.END_RIGHT, settings));
     public static final Block GUARDRAIL_END = register("guardrail_end",
             AbstractBlock.Settings.create().strength(2f).requiresTool().sounds(BlockSoundGroup.METAL).nonOpaque(), GuardrailBlock::new);
     public static final Block BRIDGE_GUARDRAIL = register("bridge_guardrail",
@@ -93,6 +135,33 @@ public final class ModBlocks {
                 .ticksRandomly();
     }
 
+    private static AbstractBlock.Settings temporaryBarrierSettings() {
+        return AbstractBlock.Settings.create()
+                .strength(1.5f)
+                .requiresTool()
+                .sounds(BlockSoundGroup.METAL)
+                .nonOpaque();
+    }
+
+    private static AbstractBlock.Settings illuminatedBarrierSettings() {
+        return temporaryBarrierSettings().luminance(state -> 12);
+    }
+
+    private static Block temporaryBarrier(
+            TemporaryBarrierBlock.Profile profile,
+            AbstractBlock.Settings settings
+    ) {
+        return new TemporaryBarrierBlock(profile, settings);
+    }
+
+    private static Block guardrail(
+            Oxidizable.OxidationLevel oxidationLevel,
+            GuardrailVariant variant,
+            AbstractBlock.Settings settings
+    ) {
+        return new OxidizingGuardrailBlock(oxidationLevel, variant, settings);
+    }
+
     private static Block register(String name, AbstractBlock.Settings settings) {
         return register(name, settings, Block::new);
     }
@@ -108,9 +177,33 @@ public final class ModBlocks {
     }
 
     public static void registerModBlocks() {
-        OxidizableBlocksRegistry.registerOxidizableBlockPair(GUARDRAIL, LIGHTLY_RUSTED_GUARDRAIL);
-        OxidizableBlocksRegistry.registerOxidizableBlockPair(LIGHTLY_RUSTED_GUARDRAIL, HEAVILY_RUSTED_GUARDRAIL);
+        registerOxidationChain(GUARDRAIL, LIGHTLY_RUSTED_GUARDRAIL, HEAVILY_RUSTED_GUARDRAIL);
+        registerOxidationChain(
+                GUARDRAIL_CENTER_POST,
+                LIGHTLY_RUSTED_GUARDRAIL_CENTER_POST,
+                HEAVILY_RUSTED_GUARDRAIL_CENTER_POST
+        );
+        registerOxidationChain(
+                GUARDRAIL_WITHOUT_POSTS,
+                LIGHTLY_RUSTED_GUARDRAIL_WITHOUT_POSTS,
+                HEAVILY_RUSTED_GUARDRAIL_WITHOUT_POSTS
+        );
+        registerOxidationChain(
+                GUARDRAIL_END_LEFT,
+                LIGHTLY_RUSTED_GUARDRAIL_END_LEFT,
+                HEAVILY_RUSTED_GUARDRAIL_END_LEFT
+        );
+        registerOxidationChain(
+                GUARDRAIL_END_RIGHT,
+                LIGHTLY_RUSTED_GUARDRAIL_END_RIGHT,
+                HEAVILY_RUSTED_GUARDRAIL_END_RIGHT
+        );
         TerraNexusAdditions.LOGGER.info("Registering road construction blocks under legacy namespace {}", LEGACY_NAMESPACE);
+    }
+
+    private static void registerOxidationChain(Block unaffected, Block exposed, Block weathered) {
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(unaffected, exposed);
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(exposed, weathered);
     }
 
     private ModBlocks() {

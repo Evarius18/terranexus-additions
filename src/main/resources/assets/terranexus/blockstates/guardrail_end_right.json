@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "terranexus:block/road_furniture/guardrail_end_right",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "terranexus:block/road_furniture/guardrail_end_right"
+    },
+    "facing=south": {
+      "model": "terranexus:block/road_furniture/guardrail_end_right",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "terranexus:block/road_furniture/guardrail_end_right",
+      "y": 180
+    }
+  }
+}

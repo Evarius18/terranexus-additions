@@ -31,12 +31,23 @@ public final class ModItemGroups {
                         entries.add(ModBlocks.MILLED_ASPHALT);
                         entries.add(ModBlocks.ROLLED_GRIT);
                         entries.add(ModBlocks.TAR);
-                        entries.add(ModBlocks.CONSTRUCTION_BARRIER);
                         entries.add(ModBlocks.DELINEATOR);
                         entries.add(ModBlocks.DELINEATOR_LEFT);
                         entries.add(ModBlocks.GUARDRAIL);
                         entries.add(ModBlocks.LIGHTLY_RUSTED_GUARDRAIL);
                         entries.add(ModBlocks.HEAVILY_RUSTED_GUARDRAIL);
+                        entries.add(ModBlocks.GUARDRAIL_CENTER_POST);
+                        entries.add(ModBlocks.LIGHTLY_RUSTED_GUARDRAIL_CENTER_POST);
+                        entries.add(ModBlocks.HEAVILY_RUSTED_GUARDRAIL_CENTER_POST);
+                        entries.add(ModBlocks.GUARDRAIL_WITHOUT_POSTS);
+                        entries.add(ModBlocks.LIGHTLY_RUSTED_GUARDRAIL_WITHOUT_POSTS);
+                        entries.add(ModBlocks.HEAVILY_RUSTED_GUARDRAIL_WITHOUT_POSTS);
+                        entries.add(ModBlocks.GUARDRAIL_END_LEFT);
+                        entries.add(ModBlocks.LIGHTLY_RUSTED_GUARDRAIL_END_LEFT);
+                        entries.add(ModBlocks.HEAVILY_RUSTED_GUARDRAIL_END_LEFT);
+                        entries.add(ModBlocks.GUARDRAIL_END_RIGHT);
+                        entries.add(ModBlocks.LIGHTLY_RUSTED_GUARDRAIL_END_RIGHT);
+                        entries.add(ModBlocks.HEAVILY_RUSTED_GUARDRAIL_END_RIGHT);
                         entries.add(ModBlocks.GUARDRAIL_END);
                         entries.add(ModBlocks.BRIDGE_GUARDRAIL);
                         entries.add(ModBlocks.BRIDGE_CONCRETE);
@@ -50,8 +61,26 @@ public final class ModItemGroups {
                         entries.add(ModBlocks.DRAINAGE_CHANNEL_B125);
                     }).build());
 
+    public static final ItemGroup CONSTRUCTION_BARRIERS = Registry.register(
+            Registries.ITEM_GROUP,
+            Identifier.of(ModBlocks.LEGACY_NAMESPACE, "construction_barriers"),
+            FabricItemGroup.builder()
+                    .icon(() -> new ItemStack(ModBlocks.BARKE))
+                    .displayName(Text.translatable("itemgroup.terranexus.construction_barriers"))
+                    .entries((context, entries) -> {
+                        entries.add(ModBlocks.CONSTRUCTION_BARRIER);
+                        entries.add(ModBlocks.BARKE);
+                        entries.add(ModBlocks.BARKE_FUSS);
+                        entries.add(ModBlocks.BARKE_LICHT);
+                        entries.add(ModBlocks.BARKE_GROSS);
+                        entries.add(ModBlocks.BARKE_GROSS_LICHT);
+                        entries.add(ModBlocks.BAUZAUN);
+                        entries.add(ModBlocks.BAUZAUN_MIT_PLANE);
+                        entries.add(ModBlocks.LEUCHTE);
+                    }).build());
+
     public static void registerItemGroups() {
-        TerraNexusAdditions.LOGGER.info("Registered TerraNexus road construction creative tab");
+        TerraNexusAdditions.LOGGER.info("Registered TerraNexus road construction and construction barriers creative tabs");
     }
 
     private ModItemGroups() {

@@ -1,0 +1,1 @@
+{"variants":{"facing=north":{"model":"terranexus:block/temporary_barriers/barke_gross_licht"},"facing=east":{"model":"terranexus:block/temporary_barriers/barke_gross_licht","y":90},"facing=south":{"model":"terranexus:block/temporary_barriers/barke_gross_licht","y":180},"facing=west":{"model":"terranexus:block/temporary_barriers/barke_gross_licht","y":270}}}
