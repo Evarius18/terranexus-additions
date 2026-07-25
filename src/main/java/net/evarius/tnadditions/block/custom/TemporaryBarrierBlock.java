@@ -17,6 +17,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.WorldView;
 
 /**
  * Directional base block for temporary construction barriers. The profiles
@@ -31,7 +32,7 @@ public class TemporaryBarrierBlock extends HorizontalFacingBlock {
             ).apply(instance, TemporaryBarrierBlock::new)
     );
 
-    private final Profile profile;
+    protected final Profile profile;
 
     public TemporaryBarrierBlock(Profile profile, Settings settings) {
         super(settings);
@@ -51,7 +52,17 @@ public class TemporaryBarrierBlock extends HorizontalFacingBlock {
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext context) {
-        return getDefaultState().with(FACING, context.getHorizontalPlayerFacing().getOpposite());
+        BlockState state = getDefaultState().with(FACING, context.getHorizontalPlayerFacing().getOpposite());
+        return canPlaceAt(state, context.getWorld(), context.getBlockPos()) ? state : null;
+    }
+
+    @Override
+    protected boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        if (profile != Profile.WARNING_LIGHT) {
+            return super.canPlaceAt(state, world, pos);
+        }
+        return !isWarningLight(world.getBlockState(pos.down()))
+                && !isWarningLight(world.getBlockState(pos.up()));
     }
 
     @Override
@@ -80,7 +91,7 @@ public class TemporaryBarrierBlock extends HorizontalFacingBlock {
                 cuboid(4, 1, 7, 12, 28, 9)),
         BARKE_LIGHT("barke_light",
                 cuboid(4, 0, 1.2, 12, 1.5, 15),
-                cuboid(4, 1, 7, 12, 30.5, 9)),
+                cuboid(4, 1, 7, 12, 32, 9)),
         BARKE_FOOT("barke_foot",
                 cuboid(4, 0, 1.2, 12, 1.5, 15)),
         LARGE_BARKE("large_barke",
@@ -98,7 +109,7 @@ public class TemporaryBarrierBlock extends HorizontalFacingBlock {
         WARNING_LIGHT("warning_light",
                 cuboid(5, 0, 6.95, 11, 7.5, 9.05));
 
-        private static final Codec<Profile> CODEC = StringIdentifiable.createCodec(Profile::values);
+        public static final Codec<Profile> CODEC = StringIdentifiable.createCodec(Profile::values);
 
         private final String id;
         private final VoxelShape alongX;
@@ -170,5 +181,10 @@ public class TemporaryBarrierBlock extends HorizontalFacingBlock {
                 double maxZ
         ) {
         }
+    }
+
+    private static boolean isWarningLight(BlockState state) {
+        return state.getBlock() instanceof TemporaryBarrierBlock barrier
+                && barrier.profile == Profile.WARNING_LIGHT;
     }
 }

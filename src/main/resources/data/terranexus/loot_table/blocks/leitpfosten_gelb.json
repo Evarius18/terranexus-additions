@@ -1,0 +1,1 @@
+{"pools":[{"conditions":[{"condition":"minecraft:survives_explosion"}],"bonus_rolls":0,"rolls":1,"entries":[{"name":"terranexus:leitpfosten_gelb","type":"minecraft:item"}]}],"type":"minecraft:block"}

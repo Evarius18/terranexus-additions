@@ -2,19 +2,25 @@ package net.evarius.tnadditions.block;
 
 import net.evarius.tnadditions.TerraNexusAdditions;
 import net.evarius.tnadditions.block.custom.DelineatorBlock;
+import net.evarius.tnadditions.block.custom.BlinkingTemporaryBarrierBlock;
 import net.evarius.tnadditions.block.custom.GuardrailBlock;
 import net.evarius.tnadditions.block.custom.GuardrailVariant;
+import net.evarius.tnadditions.block.custom.LeitpfostenBlock;
 import net.evarius.tnadditions.block.custom.OpenableManholeBlock;
 import net.evarius.tnadditions.block.custom.OxidizingGuardrailBlock;
 import net.evarius.tnadditions.block.custom.RoadFurnitureBlock;
 import net.evarius.tnadditions.block.custom.TemporaryBarrierBlock;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.GlazedTerracottaBlock;
 import net.minecraft.block.Oxidizable;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.StairsBlock;
+import net.minecraft.block.WallBlock;
+import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -56,21 +62,27 @@ public final class ModBlocks {
     public static final Block BARKE_FUSS = register("barke_fuss",
             temporaryBarrierSettings(), settings -> temporaryBarrier(TemporaryBarrierBlock.Profile.BARKE_FOOT, settings));
     public static final Block BARKE_LICHT = register("barke_licht",
-            illuminatedBarrierSettings(), settings -> temporaryBarrier(TemporaryBarrierBlock.Profile.BARKE_LIGHT, settings));
+            illuminatedBarrierSettings(), settings -> blinkingBarrier(TemporaryBarrierBlock.Profile.BARKE_LIGHT, settings));
     public static final Block BARKE_GROSS = register("barke_gross",
             temporaryBarrierSettings(), settings -> temporaryBarrier(TemporaryBarrierBlock.Profile.LARGE_BARKE, settings));
     public static final Block BARKE_GROSS_LICHT = register("barke_gross_licht",
-            illuminatedBarrierSettings(), settings -> temporaryBarrier(TemporaryBarrierBlock.Profile.LARGE_BARKE_LIGHT, settings));
+            illuminatedBarrierSettings(), settings -> blinkingBarrier(TemporaryBarrierBlock.Profile.LARGE_BARKE_LIGHT, settings));
     public static final Block BAUZAUN = register("bauzaun",
             temporaryBarrierSettings(), settings -> temporaryBarrier(TemporaryBarrierBlock.Profile.CONSTRUCTION_FENCE, settings));
     public static final Block BAUZAUN_MIT_PLANE = register("bauzaun_mit_plane",
             temporaryBarrierSettings(), settings -> temporaryBarrier(TemporaryBarrierBlock.Profile.CONSTRUCTION_FENCE, settings));
     public static final Block LEUCHTE = register("leuchte",
-            illuminatedBarrierSettings(), settings -> temporaryBarrier(TemporaryBarrierBlock.Profile.WARNING_LIGHT, settings));
+            illuminatedBarrierSettings(), settings -> blinkingBarrier(TemporaryBarrierBlock.Profile.WARNING_LIGHT, settings));
     public static final Block DELINEATOR = register("delineator",
             AbstractBlock.Settings.create().strength(1f).sounds(BlockSoundGroup.STONE).nonOpaque(), DelineatorBlock::new);
     public static final Block DELINEATOR_LEFT = register("delineator_left",
             AbstractBlock.Settings.create().strength(1f).sounds(BlockSoundGroup.STONE).nonOpaque(), DelineatorBlock::new);
+    public static final Block LEITPFOSTEN = register("leitpfosten",
+            delineatorSettings(), LeitpfostenBlock::new);
+    public static final Block LEITPFOSTEN_GELB = register("leitpfosten_gelb",
+            delineatorSettings(), LeitpfostenBlock::new);
+    public static final Block LEITPFOSTEN_WILDWARNER = register("leitpfosten_wildwarner",
+            delineatorSettings(), LeitpfostenBlock::new);
     public static final Block GUARDRAIL = register("guardrail",
             guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.UNAFFECTED, GuardrailVariant.STANDARD, settings));
     public static final Block LIGHTLY_RUSTED_GUARDRAIL = register("lightly_rusted_guardrail",
@@ -122,6 +134,18 @@ public final class ModBlocks {
     public static final Block DRAINAGE_CHANNEL_B125 = register("drainage_channel_b125",
             AbstractBlock.Settings.create().strength(3f, 7f).requiresTool().sounds(BlockSoundGroup.METAL), GlazedTerracottaBlock::new);
 
+
+    // Logs as Walls
+    public static final Block OAK_LOG_WALL = registerLogWall("oak_log_wall", Blocks.OAK_LOG);
+    public static final Block SPRUCE_LOG_WALL = registerLogWall("spruce_log_wall", Blocks.SPRUCE_LOG);
+    public static final Block BIRCH_LOG_WALL = registerLogWall("birch_log_wall", Blocks.BIRCH_LOG);
+    public static final Block JUNGLE_LOG_WALL = registerLogWall("jungle_log_wall", Blocks.JUNGLE_LOG);
+    public static final Block ACACIA_LOG_WALL = registerLogWall("acacia_log_wall", Blocks.ACACIA_LOG);
+    public static final Block DARK_OAK_LOG_WALL = registerLogWall("dark_oak_log_wall", Blocks.DARK_OAK_LOG);
+    public static final Block MANGROVE_LOG_WALL = registerLogWall("mangrove_log_wall", Blocks.MANGROVE_LOG);
+    public static final Block CHERRY_LOG_WALL = registerLogWall("cherry_log_wall", Blocks.CHERRY_LOG);
+    public static final Block PALE_OAK_LOG_WALL = registerLogWall("pale_oak_log_wall", Blocks.PALE_OAK_LOG);
+
     private static AbstractBlock.Settings stone(float hardness, float resistance) {
         return AbstractBlock.Settings.create().strength(hardness, resistance).requiresTool().sounds(BlockSoundGroup.STONE);
     }
@@ -144,7 +168,16 @@ public final class ModBlocks {
     }
 
     private static AbstractBlock.Settings illuminatedBarrierSettings() {
-        return temporaryBarrierSettings().luminance(state -> 12);
+        return temporaryBarrierSettings().luminance(state ->
+                state.contains(BlinkingTemporaryBarrierBlock.LIT)
+                        && state.get(BlinkingTemporaryBarrierBlock.LIT) ? 12 : 0);
+    }
+
+    private static AbstractBlock.Settings delineatorSettings() {
+        return AbstractBlock.Settings.create()
+                .strength(1f)
+                .sounds(BlockSoundGroup.STONE)
+                .nonOpaque();
     }
 
     private static Block temporaryBarrier(
@@ -154,12 +187,29 @@ public final class ModBlocks {
         return new TemporaryBarrierBlock(profile, settings);
     }
 
+    private static Block blinkingBarrier(
+            TemporaryBarrierBlock.Profile profile,
+            AbstractBlock.Settings settings
+    ) {
+        return new BlinkingTemporaryBarrierBlock(profile, settings);
+    }
+
     private static Block guardrail(
             Oxidizable.OxidationLevel oxidationLevel,
             GuardrailVariant variant,
             AbstractBlock.Settings settings
     ) {
         return new OxidizingGuardrailBlock(oxidationLevel, variant, settings);
+    }
+
+    private static Block registerLogWall(String name, Block sourceLog) {
+        AbstractBlock.Settings settings = AbstractBlock.Settings.create()
+                .mapColor(sourceLog.getDefaultMapColor())
+                .instrument(NoteBlockInstrument.BASS)
+                .strength(2f)
+                .sounds(BlockSoundGroup.WOOD)
+                .burnable();
+        return register(name, settings, WallBlock::new);
     }
 
     private static Block register(String name, AbstractBlock.Settings settings) {
@@ -177,6 +227,7 @@ public final class ModBlocks {
     }
 
     public static void registerModBlocks() {
+        registerFlammableLogWalls();
         registerOxidationChain(GUARDRAIL, LIGHTLY_RUSTED_GUARDRAIL, HEAVILY_RUSTED_GUARDRAIL);
         registerOxidationChain(
                 GUARDRAIL_CENTER_POST,
@@ -199,6 +250,19 @@ public final class ModBlocks {
                 HEAVILY_RUSTED_GUARDRAIL_END_RIGHT
         );
         TerraNexusAdditions.LOGGER.info("Registering road construction blocks under legacy namespace {}", LEGACY_NAMESPACE);
+    }
+
+    private static void registerFlammableLogWalls() {
+        FlammableBlockRegistry flammability = FlammableBlockRegistry.getDefaultInstance();
+        flammability.add(OAK_LOG_WALL, 5, 5);
+        flammability.add(SPRUCE_LOG_WALL, 5, 5);
+        flammability.add(BIRCH_LOG_WALL, 5, 5);
+        flammability.add(JUNGLE_LOG_WALL, 5, 5);
+        flammability.add(ACACIA_LOG_WALL, 5, 5);
+        flammability.add(DARK_OAK_LOG_WALL, 5, 5);
+        flammability.add(MANGROVE_LOG_WALL, 5, 5);
+        flammability.add(CHERRY_LOG_WALL, 5, 5);
+        flammability.add(PALE_OAK_LOG_WALL, 5, 5);
     }
 
     private static void registerOxidationChain(Block unaffected, Block exposed, Block weathered) {

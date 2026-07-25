@@ -43,6 +43,9 @@
                    "terranexus:barke_gross_licht",
                    "terranexus:bauzaun",
                    "terranexus:bauzaun_mit_plane",
-                   "terranexus:leuchte"
+                   "terranexus:leuchte",
+                   "terranexus:leitpfosten",
+                   "terranexus:leitpfosten_gelb",
+                   "terranexus:leitpfosten_wildwarner"
                ]
 }

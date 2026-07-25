@@ -3,7 +3,9 @@ package net.evarius.tnadditions.item;
 import net.evarius.tnadditions.TerraNexusAdditions;
 import net.evarius.tnadditions.block.ModBlocks;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemGroups;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -33,6 +35,9 @@ public final class ModItemGroups {
                         entries.add(ModBlocks.TAR);
                         entries.add(ModBlocks.DELINEATOR);
                         entries.add(ModBlocks.DELINEATOR_LEFT);
+                        entries.add(ModBlocks.LEITPFOSTEN);
+                        entries.add(ModBlocks.LEITPFOSTEN_GELB);
+                        entries.add(ModBlocks.LEITPFOSTEN_WILDWARNER);
                         entries.add(ModBlocks.GUARDRAIL);
                         entries.add(ModBlocks.LIGHTLY_RUSTED_GUARDRAIL);
                         entries.add(ModBlocks.HEAVILY_RUSTED_GUARDRAIL);
@@ -80,7 +85,20 @@ public final class ModItemGroups {
                     }).build());
 
     public static void registerItemGroups() {
-        TerraNexusAdditions.LOGGER.info("Registered TerraNexus road construction and construction barriers creative tabs");
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> {
+            entries.add(ModBlocks.OAK_LOG_WALL);
+            entries.add(ModBlocks.SPRUCE_LOG_WALL);
+            entries.add(ModBlocks.BIRCH_LOG_WALL);
+            entries.add(ModBlocks.JUNGLE_LOG_WALL);
+            entries.add(ModBlocks.ACACIA_LOG_WALL);
+            entries.add(ModBlocks.DARK_OAK_LOG_WALL);
+            entries.add(ModBlocks.MANGROVE_LOG_WALL);
+            entries.add(ModBlocks.CHERRY_LOG_WALL);
+            entries.add(ModBlocks.PALE_OAK_LOG_WALL);
+        });
+        TerraNexusAdditions.LOGGER.info(
+                "Registered TerraNexus road construction, construction barriers and natural-block entries"
+        );
     }
 
     private ModItemGroups() {
