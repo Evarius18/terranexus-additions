@@ -28,13 +28,15 @@ public final class ModItemGroups {
                         entries.add(ModBlocks.WORN_ASPHALT_STAIRS);
                         entries.add(ModBlocks.WHITE_LINE_ASPHALT);
                         entries.add(ModBlocks.YELLOW_LINE_ASPHALT);
+                        entries.add(ModBlocks.ASPHALT_MIT_REGENLAUF);
+                        entries.add(ModBlocks.ASPHALT_MIT_REGENLAUF_SCHACHT);
+                        entries.add(ModBlocks.SCHACHTDECKEL_ASPHAL);
+                        entries.add(ModBlocks.PFLASTERSTEINE);
                         entries.add(ModBlocks.CONSTRUCTION_SAND);
                         entries.add(ModBlocks.CRUSHED_STONE);
                         entries.add(ModBlocks.MILLED_ASPHALT);
                         entries.add(ModBlocks.ROLLED_GRIT);
                         entries.add(ModBlocks.TAR);
-                        entries.add(ModBlocks.DELINEATOR);
-                        entries.add(ModBlocks.DELINEATOR_LEFT);
                         entries.add(ModBlocks.LEITPFOSTEN);
                         entries.add(ModBlocks.LEITPFOSTEN_GELB);
                         entries.add(ModBlocks.LEITPFOSTEN_WILDWARNER);
@@ -59,11 +61,8 @@ public final class ModItemGroups {
                         entries.add(ModBlocks.BRIDGE_CONCRETE_SLAB);
                         entries.add(ModBlocks.BRIDGE_STEEL);
                         entries.add(ModBlocks.BRIDGE_EXPANSION_JOINT);
-                        entries.add(ModBlocks.ROAD_MANHOLE_D400);
-                        entries.add(ModBlocks.PATH_MANHOLE_B125);
-                        entries.add(ModBlocks.STREET_DRAIN_C250);
-                        entries.add(ModBlocks.CURB_DRAIN_C250);
-                        entries.add(ModBlocks.DRAINAGE_CHANNEL_B125);
+                        entries.add(ModBlocks.GULLY);
+                        entries.add(ModBlocks.OBERFLURHYDRANT);
                     }).build());
 
     public static final ItemGroup CONSTRUCTION_BARRIERS = Registry.register(

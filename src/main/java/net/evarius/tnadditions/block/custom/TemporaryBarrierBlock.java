@@ -19,6 +19,9 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Directional base block for temporary construction barriers. The profiles
  * describe the supplied models closely enough to keep their visible frame,
@@ -58,11 +61,15 @@ public class TemporaryBarrierBlock extends HorizontalFacingBlock {
 
     @Override
     protected boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        if (profile != Profile.WARNING_LIGHT) {
-            return super.canPlaceAt(state, world, pos);
+        if (!super.canPlaceAt(state, world, pos)) {
+            return false;
         }
-        return !isWarningLight(world.getBlockState(pos.down()))
-                && !isWarningLight(world.getBlockState(pos.up()));
+        if (profile == Profile.WARNING_LIGHT
+                && (isWarningLight(world.getBlockState(pos.down()))
+                || isWarningLight(world.getBlockState(pos.up())))) {
+            return false;
+        }
+        return !overlapsExistingBarrier(state, world, pos);
     }
 
     @Override
@@ -83,6 +90,29 @@ public class TemporaryBarrierBlock extends HorizontalFacingBlock {
     @Override
     protected VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return profile.getShape(state.get(FACING));
+    }
+
+    private boolean overlapsExistingBarrier(BlockState state, WorldView world, BlockPos pos) {
+        Set<BlockPos> candidateFootprint = profile.getFootprint(pos, state.get(FACING));
+        for (int xOffset = -2; xOffset <= 2; xOffset++) {
+            for (int zOffset = -2; zOffset <= 2; zOffset++) {
+                BlockPos otherPos = pos.add(xOffset, 0, zOffset);
+                BlockState otherState = world.getBlockState(otherPos);
+                if (!(otherState.getBlock() instanceof TemporaryBarrierBlock otherBarrier)) {
+                    continue;
+                }
+                Set<BlockPos> otherFootprint = otherBarrier.profile.getFootprint(
+                        otherPos,
+                        otherState.get(FACING)
+                );
+                for (BlockPos occupied : candidateFootprint) {
+                    if (otherFootprint.contains(occupied)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     public enum Profile implements StringIdentifiable {
@@ -123,6 +153,27 @@ public class TemporaryBarrierBlock extends HorizontalFacingBlock {
 
         private VoxelShape getShape(Direction facing) {
             return facing.getAxis() == Direction.Axis.Z ? alongX : alongZ;
+        }
+
+        private Set<BlockPos> getFootprint(BlockPos center, Direction facing) {
+            Set<BlockPos> footprint = new HashSet<>();
+            if (!isThreeBlocksWide()) {
+                footprint.add(center.toImmutable());
+                return footprint;
+            }
+            Direction widthDirection = facing.getAxis() == Direction.Axis.Z
+                    ? Direction.EAST
+                    : Direction.SOUTH;
+            footprint.add(center.offset(widthDirection.getOpposite()).toImmutable());
+            footprint.add(center.toImmutable());
+            footprint.add(center.offset(widthDirection).toImmutable());
+            return footprint;
+        }
+
+        private boolean isThreeBlocksWide() {
+            return this == LARGE_BARKE
+                    || this == LARGE_BARKE_LIGHT
+                    || this == CONSTRUCTION_FENCE;
         }
 
         @Override

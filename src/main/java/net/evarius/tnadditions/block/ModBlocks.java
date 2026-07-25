@@ -1,12 +1,12 @@
 package net.evarius.tnadditions.block;
 
 import net.evarius.tnadditions.TerraNexusAdditions;
-import net.evarius.tnadditions.block.custom.DelineatorBlock;
 import net.evarius.tnadditions.block.custom.BlinkingTemporaryBarrierBlock;
 import net.evarius.tnadditions.block.custom.GuardrailBlock;
 import net.evarius.tnadditions.block.custom.GuardrailVariant;
+import net.evarius.tnadditions.block.custom.GullyBlock;
+import net.evarius.tnadditions.block.custom.HydrantBlock;
 import net.evarius.tnadditions.block.custom.LeitpfostenBlock;
-import net.evarius.tnadditions.block.custom.OpenableManholeBlock;
 import net.evarius.tnadditions.block.custom.OxidizingGuardrailBlock;
 import net.evarius.tnadditions.block.custom.RoadFurnitureBlock;
 import net.evarius.tnadditions.block.custom.TemporaryBarrierBlock;
@@ -46,6 +46,13 @@ public final class ModBlocks {
             settings -> new StairsBlock(WORN_ASPHALT.getDefaultState(), settings));
     public static final Block WHITE_LINE_ASPHALT = register("white_line_asphalt", stone(2.2f, 6f));
     public static final Block YELLOW_LINE_ASPHALT = register("yellow_line_asphalt", stone(2.2f, 6f));
+    public static final Block ASPHALT_MIT_REGENLAUF = register("asphalt_mit_regenlauf",
+            detailedRoadSurface(2.2f, 6f), GlazedTerracottaBlock::new);
+    public static final Block ASPHALT_MIT_REGENLAUF_SCHACHT = register("asphalt_mit_regenlauf_schacht",
+            detailedRoadSurface(2.2f, 6f), GlazedTerracottaBlock::new);
+    public static final Block SCHACHTDECKEL_ASPHAL = register("schachtdeckel_asphal",
+            stone(2.2f, 6f), GlazedTerracottaBlock::new);
+    public static final Block PFLASTERSTEINE = register("pflastersteine", stone(1.8f, 6f));
 
     // Construction Materials
     public static final Block CONSTRUCTION_SAND = register("construction_sand",
@@ -80,10 +87,6 @@ public final class ModBlocks {
             illuminatedBarrierSettings(), settings -> blinkingBarrier(TemporaryBarrierBlock.Profile.WARNING_LIGHT, settings));
 
     // Delineators & Roadside Posts
-    public static final Block DELINEATOR = register("delineator",
-            AbstractBlock.Settings.create().strength(1f).sounds(BlockSoundGroup.STONE).nonOpaque(), DelineatorBlock::new);
-    public static final Block DELINEATOR_LEFT = register("delineator_left",
-            AbstractBlock.Settings.create().strength(1f).sounds(BlockSoundGroup.STONE).nonOpaque(), DelineatorBlock::new);
     public static final Block LEITPFOSTEN = register("leitpfosten",
             delineatorSettings(), LeitpfostenBlock::new);
     public static final Block LEITPFOSTEN_GELB = register("leitpfosten_gelb",
@@ -141,16 +144,12 @@ public final class ModBlocks {
             AbstractBlock.Settings.create().strength(4f, 8f).requiresTool().sounds(BlockSoundGroup.METAL));
 
     // Drainage & Manholes
-    public static final Block ROAD_MANHOLE_D400 = register("road_manhole_d400",
-            AbstractBlock.Settings.create().strength(5f, 10f).requiresTool().sounds(BlockSoundGroup.METAL).nonOpaque(), OpenableManholeBlock::new);
-    public static final Block PATH_MANHOLE_B125 = register("path_manhole_b125",
-            AbstractBlock.Settings.create().strength(4f, 8f).requiresTool().sounds(BlockSoundGroup.METAL).nonOpaque(), OpenableManholeBlock::new);
-    public static final Block STREET_DRAIN_C250 = register("street_drain_c250",
-            AbstractBlock.Settings.create().strength(4f, 8f).requiresTool().sounds(BlockSoundGroup.METAL), GlazedTerracottaBlock::new);
-    public static final Block CURB_DRAIN_C250 = register("curb_drain_c250",
-            AbstractBlock.Settings.create().strength(4f, 8f).requiresTool().sounds(BlockSoundGroup.METAL), GlazedTerracottaBlock::new);
-    public static final Block DRAINAGE_CHANNEL_B125 = register("drainage_channel_b125",
-            AbstractBlock.Settings.create().strength(3f, 7f).requiresTool().sounds(BlockSoundGroup.METAL), GlazedTerracottaBlock::new);
+    public static final Block GULLY = register("gully",
+            AbstractBlock.Settings.create().strength(4f, 8f).requiresTool().sounds(BlockSoundGroup.METAL).nonOpaque(),
+            GullyBlock::new);
+    public static final Block OBERFLURHYDRANT = register("oberflurhydrant",
+            AbstractBlock.Settings.create().strength(4f, 8f).requiresTool().sounds(BlockSoundGroup.METAL).nonOpaque(),
+            HydrantBlock::new);
 
 
     // Logs as Walls
@@ -166,6 +165,10 @@ public final class ModBlocks {
 
     private static AbstractBlock.Settings stone(float hardness, float resistance) {
         return AbstractBlock.Settings.create().strength(hardness, resistance).requiresTool().sounds(BlockSoundGroup.STONE);
+    }
+
+    private static AbstractBlock.Settings detailedRoadSurface(float hardness, float resistance) {
+        return stone(hardness, resistance).nonOpaque();
     }
 
     private static AbstractBlock.Settings guardrailSettings() {

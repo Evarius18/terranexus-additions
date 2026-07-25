@@ -1,0 +1,1 @@
+{"variants":{"facing=north":{"model":"terranexus:block/road_surface/schachtdeckel_asphal"},"facing=east":{"model":"terranexus:block/road_surface/schachtdeckel_asphal","y":90},"facing=south":{"model":"terranexus:block/road_surface/schachtdeckel_asphal","y":180},"facing=west":{"model":"terranexus:block/road_surface/schachtdeckel_asphal","y":270}}}
