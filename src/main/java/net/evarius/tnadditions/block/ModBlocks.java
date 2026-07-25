@@ -35,6 +35,7 @@ import java.util.function.Function;
 public final class ModBlocks {
     public static final String LEGACY_NAMESPACE = "terranexus";
 
+    // Asphalt
     public static final Block ASPHALT = register("asphalt", stone(2.2f, 6f));
     public static final Block ASPHALT_SLAB = register("asphalt_slab", stone(2.2f, 6f), SlabBlock::new);
     public static final Block ASPHALT_STAIRS = register("asphalt_stairs", stone(2.2f, 6f),
@@ -45,6 +46,8 @@ public final class ModBlocks {
             settings -> new StairsBlock(WORN_ASPHALT.getDefaultState(), settings));
     public static final Block WHITE_LINE_ASPHALT = register("white_line_asphalt", stone(2.2f, 6f));
     public static final Block YELLOW_LINE_ASPHALT = register("yellow_line_asphalt", stone(2.2f, 6f));
+
+    // Construction Materials
     public static final Block CONSTRUCTION_SAND = register("construction_sand",
             AbstractBlock.Settings.create().strength(0.6f).sounds(BlockSoundGroup.SAND));
     public static final Block CRUSHED_STONE = register("crushed_stone",
@@ -55,6 +58,8 @@ public final class ModBlocks {
             AbstractBlock.Settings.create().strength(0.8f).sounds(BlockSoundGroup.GRAVEL));
     public static final Block TAR = register("tar",
             AbstractBlock.Settings.create().strength(1.4f).sounds(BlockSoundGroup.MUD));
+
+    // Construction Barriers
     public static final Block CONSTRUCTION_BARRIER = register("construction_barrier",
             AbstractBlock.Settings.create().strength(1.2f).sounds(BlockSoundGroup.WOOD).nonOpaque(), RoadFurnitureBlock::new);
     public static final Block BARKE = register("barke",
@@ -73,6 +78,8 @@ public final class ModBlocks {
             temporaryBarrierSettings(), settings -> temporaryBarrier(TemporaryBarrierBlock.Profile.CONSTRUCTION_FENCE, settings));
     public static final Block LEUCHTE = register("leuchte",
             illuminatedBarrierSettings(), settings -> blinkingBarrier(TemporaryBarrierBlock.Profile.WARNING_LIGHT, settings));
+
+    // Delineators & Roadside Posts
     public static final Block DELINEATOR = register("delineator",
             AbstractBlock.Settings.create().strength(1f).sounds(BlockSoundGroup.STONE).nonOpaque(), DelineatorBlock::new);
     public static final Block DELINEATOR_LEFT = register("delineator_left",
@@ -83,46 +90,57 @@ public final class ModBlocks {
             delineatorSettings(), LeitpfostenBlock::new);
     public static final Block LEITPFOSTEN_WILDWARNER = register("leitpfosten_wildwarner",
             delineatorSettings(), LeitpfostenBlock::new);
+
+    // Guardrails
     public static final Block GUARDRAIL = register("guardrail",
             guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.UNAFFECTED, GuardrailVariant.STANDARD, settings));
     public static final Block LIGHTLY_RUSTED_GUARDRAIL = register("lightly_rusted_guardrail",
             guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.EXPOSED, GuardrailVariant.STANDARD, settings));
     public static final Block HEAVILY_RUSTED_GUARDRAIL = register("heavily_rusted_guardrail",
             guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.WEATHERED, GuardrailVariant.STANDARD, settings));
+
     public static final Block GUARDRAIL_CENTER_POST = register("guardrail_center_post",
             guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.UNAFFECTED, GuardrailVariant.CENTER_POST, settings));
     public static final Block LIGHTLY_RUSTED_GUARDRAIL_CENTER_POST = register("lightly_rusted_guardrail_center_post",
             guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.EXPOSED, GuardrailVariant.CENTER_POST, settings));
     public static final Block HEAVILY_RUSTED_GUARDRAIL_CENTER_POST = register("heavily_rusted_guardrail_center_post",
             guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.WEATHERED, GuardrailVariant.CENTER_POST, settings));
+
     public static final Block GUARDRAIL_WITHOUT_POSTS = register("guardrail_without_posts",
             guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.UNAFFECTED, GuardrailVariant.WITHOUT_POSTS, settings));
     public static final Block LIGHTLY_RUSTED_GUARDRAIL_WITHOUT_POSTS = register("lightly_rusted_guardrail_without_posts",
             guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.EXPOSED, GuardrailVariant.WITHOUT_POSTS, settings));
     public static final Block HEAVILY_RUSTED_GUARDRAIL_WITHOUT_POSTS = register("heavily_rusted_guardrail_without_posts",
             guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.WEATHERED, GuardrailVariant.WITHOUT_POSTS, settings));
+
     public static final Block GUARDRAIL_END_LEFT = register("guardrail_end_left",
             guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.UNAFFECTED, GuardrailVariant.END_LEFT, settings));
     public static final Block LIGHTLY_RUSTED_GUARDRAIL_END_LEFT = register("lightly_rusted_guardrail_end_left",
             guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.EXPOSED, GuardrailVariant.END_LEFT, settings));
     public static final Block HEAVILY_RUSTED_GUARDRAIL_END_LEFT = register("heavily_rusted_guardrail_end_left",
             guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.WEATHERED, GuardrailVariant.END_LEFT, settings));
+
     public static final Block GUARDRAIL_END_RIGHT = register("guardrail_end_right",
             guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.UNAFFECTED, GuardrailVariant.END_RIGHT, settings));
     public static final Block LIGHTLY_RUSTED_GUARDRAIL_END_RIGHT = register("lightly_rusted_guardrail_end_right",
             guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.EXPOSED, GuardrailVariant.END_RIGHT, settings));
     public static final Block HEAVILY_RUSTED_GUARDRAIL_END_RIGHT = register("heavily_rusted_guardrail_end_right",
             guardrailSettings(), settings -> guardrail(Oxidizable.OxidationLevel.WEATHERED, GuardrailVariant.END_RIGHT, settings));
+
     public static final Block GUARDRAIL_END = register("guardrail_end",
             AbstractBlock.Settings.create().strength(2f).requiresTool().sounds(BlockSoundGroup.METAL).nonOpaque(), GuardrailBlock::new);
     public static final Block BRIDGE_GUARDRAIL = register("bridge_guardrail",
             AbstractBlock.Settings.create().strength(3f).requiresTool().sounds(BlockSoundGroup.METAL).nonOpaque(), GuardrailBlock::new);
+
+    // Bridge
     public static final Block BRIDGE_CONCRETE = register("bridge_concrete", stone(4f, 8f));
     public static final Block BRIDGE_CONCRETE_SLAB = register("bridge_concrete_slab", stone(4f, 8f), SlabBlock::new);
     public static final Block BRIDGE_STEEL = register("bridge_steel",
             AbstractBlock.Settings.create().strength(5f, 9f).requiresTool().sounds(BlockSoundGroup.METAL));
     public static final Block BRIDGE_EXPANSION_JOINT = register("bridge_expansion_joint",
             AbstractBlock.Settings.create().strength(4f, 8f).requiresTool().sounds(BlockSoundGroup.METAL));
+
+    // Drainage & Manholes
     public static final Block ROAD_MANHOLE_D400 = register("road_manhole_d400",
             AbstractBlock.Settings.create().strength(5f, 10f).requiresTool().sounds(BlockSoundGroup.METAL).nonOpaque(), OpenableManholeBlock::new);
     public static final Block PATH_MANHOLE_B125 = register("path_manhole_b125",
