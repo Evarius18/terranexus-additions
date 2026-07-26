@@ -1,13 +1,20 @@
 package net.evarius.tnadditions.client;
 
 import net.evarius.tnadditions.block.ModBlocks;
+import net.evarius.tnadditions.client.marking.ClientRoadMarkings;
+import net.evarius.tnadditions.client.marking.RoadMarkingEditorControls;
+import net.evarius.tnadditions.client.marking.RoadMarkingRenderer;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
 import net.minecraft.client.render.BlockRenderLayer;
 
 public class TerranexusAdditionsClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
+		ClientRoadMarkings.registerNetworking();
+		RoadMarkingEditorControls.register();
+		WorldRenderEvents.LAST.register(RoadMarkingRenderer::render);
 		BlockRenderLayerMap.putBlocks(
 				BlockRenderLayer.CUTOUT,
 				ModBlocks.GUARDRAIL_END_LEFT,

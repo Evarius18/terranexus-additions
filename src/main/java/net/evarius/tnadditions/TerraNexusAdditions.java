@@ -2,7 +2,12 @@ package net.evarius.tnadditions;
 
 import net.evarius.tnadditions.block.ModBlocks;
 import net.evarius.tnadditions.config.GuardrailOxidationConfig;
+import net.evarius.tnadditions.config.RoadMarkingSupportConfig;
 import net.evarius.tnadditions.item.ModItemGroups;
+import net.evarius.tnadditions.item.ModItems;
+import net.evarius.tnadditions.marking.MarkingTypes;
+import net.evarius.tnadditions.marking.network.RoadMarkingNetworking;
+import net.evarius.tnadditions.marking.support.RoadMarkingSupportManager;
 import net.fabricmc.api.ModInitializer;
 
 import net.minecraft.util.Identifier;
@@ -21,7 +26,12 @@ public class TerraNexusAdditions implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		GuardrailOxidationConfig.load();
+		RoadMarkingSupportConfig.load();
 		ModBlocks.registerModBlocks();
+		ModItems.register();
+		MarkingTypes.registerDefaults();
+		RoadMarkingNetworking.register();
+		RoadMarkingSupportManager.register();
 		ModItemGroups.registerItemGroups();
 		LOGGER.info("TerraNexus road construction additions initialized");
 	}

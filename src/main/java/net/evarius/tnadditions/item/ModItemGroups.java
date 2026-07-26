@@ -63,6 +63,7 @@ public final class ModItemGroups {
                         entries.add(ModBlocks.BRIDGE_EXPANSION_JOINT);
                         entries.add(ModBlocks.GULLY);
                         entries.add(ModBlocks.OBERFLURHYDRANT);
+                        entries.add(ModItems.ROAD_MARKING_EDITOR);
                     }).build());
 
     public static final ItemGroup CONSTRUCTION_BARRIERS = Registry.register(

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "tools",
+  "ingredients": [
+    "minecraft:brush",
+    "minecraft:white_dye"
+  ],
+  "result": {
+    "id": "terranexus:road_marking_editor",
+    "count": 1
+  }
+}

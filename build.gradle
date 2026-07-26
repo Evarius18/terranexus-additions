@@ -48,6 +48,20 @@ tasks.withType(JavaCompile).configureEach {
 	it.options.release = 21
 }
 
+tasks.register("testRoadMarkingCore", JavaExec) {
+	group = "verification"
+	description = "Runs dependency-free spline, geometry and serialization checks."
+	dependsOn testClasses
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = "net.evarius.tnadditions.marking.RoadMarkingCoreTest"
+}
+
+tasks.named("test", Test) {
+	failOnNoDiscoveredTests = false
+}
+
+check.dependsOn testRoadMarkingCore
+
 java {
 	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
 	// if it is present.
