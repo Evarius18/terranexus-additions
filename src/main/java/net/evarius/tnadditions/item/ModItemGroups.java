@@ -21,7 +21,7 @@ public final class ModItemGroups {
                     .displayName(Text.translatable("itemgroup.terranexus.roleplay_building"))
                     .entries((context, entries) -> {
                         entries.add(ModBlocks.ASPHALT);
-                        entries.add(ModBlocks.ASPHALT_SLAB);
+                        ModBlocks.ASPHALT_HEIGHTS.forEach(entries::add);
                         entries.add(ModBlocks.ASPHALT_STAIRS);
                         entries.add(ModBlocks.WORN_ASPHALT);
                         entries.add(ModBlocks.WORN_ASPHALT_SLAB);

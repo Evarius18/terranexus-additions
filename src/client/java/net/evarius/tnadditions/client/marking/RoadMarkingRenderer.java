@@ -108,7 +108,7 @@ public final class RoadMarkingRenderer {
                 normal.getOffsetZ() * 0.01);
     }
 
-    private static void drawSurfaceGrid(WorldRenderContext context, VertexConsumer quads,
+    private static void drawSurfaceGrid(WorldRenderContext context, VertexConsumer gridQuads,
                                         BlockHitResult hit, Vec3d active, Vec3d camera) {
         Direction face = hit.getSide();
         Vec3d normal = new Vec3d(face.getOffsetX(), face.getOffsetY(), face.getOffsetZ());
@@ -121,24 +121,38 @@ public final class RoadMarkingRenderer {
             double actualStep = 1.0 / divisions;
             for (int i = 0; i <= divisions; i++) {
                 double offset = i * actualStep;
-                drawStrip(quads, origin.add(v.multiply(offset)), u, v, camera, 0x8839BFFF);
-                drawStrip(quads, origin.add(u.multiply(offset)), v, u, camera, 0x8839BFFF);
+                drawStrip(gridQuads, origin.add(v.multiply(offset)), u, v, camera, 0x8839BFFF);
+                drawStrip(gridQuads, origin.add(u.multiply(offset)), v, u, camera, 0x8839BFFF);
+            }
+
+            // Acquiring a different layer ends the currently active immediate
+            // buffer. Therefore every grid quad must be written before this.
+            VertexConsumer gridPoints = context.consumers().getBuffer(RenderLayer.getDebugFilledBox());
+            for (int i = 0; i <= divisions; i++) {
+                double offset = i * actualStep;
                 for (int j = 0; j <= divisions; j++) {
                     Vec3d point = origin.add(u.multiply(offset)).add(v.multiply(j * actualStep))
                             .subtract(camera);
-                    VertexRendering.drawFilledBox(context.matrixStack(), quads,
+                    VertexRendering.drawFilledBox(context.matrixStack(), gridPoints,
                             point.x - 0.012, point.y - 0.012, point.z - 0.012,
                             point.x + 0.012, point.y + 0.012, point.z + 0.012,
                             0.2F, 0.65F, 1.0F, 0.55F);
                 }
             }
-        }
 
-        Vec3d highlighted = active.subtract(camera);
-        VertexRendering.drawFilledBox(context.matrixStack(), quads,
-                highlighted.x - 0.055, highlighted.y - 0.055, highlighted.z - 0.055,
-                highlighted.x + 0.055, highlighted.y + 0.055, highlighted.z + 0.055,
-                1.0F, 0.55F, 0.05F, 0.92F);
+            Vec3d highlighted = active.subtract(camera);
+            VertexRendering.drawFilledBox(context.matrixStack(), gridPoints,
+                    highlighted.x - 0.055, highlighted.y - 0.055, highlighted.z - 0.055,
+                    highlighted.x + 0.055, highlighted.y + 0.055, highlighted.z + 0.055,
+                    1.0F, 0.55F, 0.05F, 0.92F);
+        } else {
+            VertexConsumer gridPoints = context.consumers().getBuffer(RenderLayer.getDebugFilledBox());
+            Vec3d highlighted = active.subtract(camera);
+            VertexRendering.drawFilledBox(context.matrixStack(), gridPoints,
+                    highlighted.x - 0.055, highlighted.y - 0.055, highlighted.z - 0.055,
+                    highlighted.x + 0.055, highlighted.y + 0.055, highlighted.z + 0.055,
+                    1.0F, 0.55F, 0.05F, 0.92F);
+        }
     }
 
     private static void drawStrip(VertexConsumer consumer, Vec3d start, Vec3d direction,

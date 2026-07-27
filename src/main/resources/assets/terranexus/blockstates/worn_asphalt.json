@@ -1,1 +1,10 @@
-﻿{"variants":{"":{"model":"terranexus:block/road_surface/worn_asphalt"}}}
+{
+  "variants": {
+    "": [
+      {"model": "terranexus:block/road_surface/worn_asphalt", "y": 0},
+      {"model": "terranexus:block/road_surface/worn_asphalt", "y": 90},
+      {"model": "terranexus:block/road_surface/worn_asphalt", "y": 180},
+      {"model": "terranexus:block/road_surface/worn_asphalt", "y": 270}
+    ]
+  }
+}

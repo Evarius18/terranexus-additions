@@ -2,6 +2,7 @@ package net.evarius.tnadditions.block;
 
 import net.evarius.tnadditions.TerraNexusAdditions;
 import net.evarius.tnadditions.block.custom.BlinkingTemporaryBarrierBlock;
+import net.evarius.tnadditions.block.custom.FixedRoadHeightBlock;
 import net.evarius.tnadditions.block.custom.GuardrailBlock;
 import net.evarius.tnadditions.block.custom.GuardrailVariant;
 import net.evarius.tnadditions.block.custom.GullyBlock;
@@ -10,6 +11,7 @@ import net.evarius.tnadditions.block.custom.LeitpfostenBlock;
 import net.evarius.tnadditions.block.custom.OxidizingGuardrailBlock;
 import net.evarius.tnadditions.block.custom.RoadFurnitureBlock;
 import net.evarius.tnadditions.block.custom.TemporaryBarrierBlock;
+import net.evarius.tnadditions.block.material.RoadSurfaceMaterials;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.AbstractBlock;
@@ -30,19 +32,55 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 
+import java.util.List;
 import java.util.function.Function;
 
 public final class ModBlocks {
     public static final String LEGACY_NAMESPACE = "terranexus";
 
     // Asphalt
-    public static final Block ASPHALT = register("asphalt", stone(2.2f, 6f));
-    public static final Block ASPHALT_SLAB = register("asphalt_slab", stone(2.2f, 6f), SlabBlock::new);
-    public static final Block ASPHALT_STAIRS = register("asphalt_stairs", stone(2.2f, 6f),
+    public static final Block ASPHALT = register("asphalt", RoadSurfaceMaterials.ASPHALT.settings());
+    public static final Block ASPHALT_LAYER = registerAsphaltHeight("asphalt_layer", 1);
+    public static final Block ASPHALT_HEIGHT_2_16 = registerAsphaltHeight(2);
+    public static final Block ASPHALT_HEIGHT_3_16 = registerAsphaltHeight(3);
+    public static final Block ASPHALT_HEIGHT_4_16 = registerAsphaltHeight(4);
+    public static final Block ASPHALT_HEIGHT_5_16 = registerAsphaltHeight(5);
+    public static final Block ASPHALT_HEIGHT_6_16 = registerAsphaltHeight(6);
+    public static final Block ASPHALT_HEIGHT_7_16 = registerAsphaltHeight(7);
+    public static final Block ASPHALT_SLAB = register("asphalt_slab",
+            RoadSurfaceMaterials.ASPHALT.settings(), SlabBlock::new);
+    public static final Block ASPHALT_HEIGHT_9_16 = registerAsphaltHeight(9);
+    public static final Block ASPHALT_HEIGHT_10_16 = registerAsphaltHeight(10);
+    public static final Block ASPHALT_HEIGHT_11_16 = registerAsphaltHeight(11);
+    public static final Block ASPHALT_HEIGHT_12_16 = registerAsphaltHeight(12);
+    public static final Block ASPHALT_HEIGHT_13_16 = registerAsphaltHeight(13);
+    public static final Block ASPHALT_HEIGHT_14_16 = registerAsphaltHeight(14);
+    public static final Block ASPHALT_HEIGHT_15_16 = registerAsphaltHeight(15);
+    public static final List<Block> ASPHALT_HEIGHTS = List.of(
+            ASPHALT_LAYER,
+            ASPHALT_HEIGHT_2_16,
+            ASPHALT_HEIGHT_3_16,
+            ASPHALT_HEIGHT_4_16,
+            ASPHALT_HEIGHT_5_16,
+            ASPHALT_HEIGHT_6_16,
+            ASPHALT_HEIGHT_7_16,
+            ASPHALT_SLAB,
+            ASPHALT_HEIGHT_9_16,
+            ASPHALT_HEIGHT_10_16,
+            ASPHALT_HEIGHT_11_16,
+            ASPHALT_HEIGHT_12_16,
+            ASPHALT_HEIGHT_13_16,
+            ASPHALT_HEIGHT_14_16,
+            ASPHALT_HEIGHT_15_16
+    );
+    public static final Block ASPHALT_STAIRS = register("asphalt_stairs",
+            RoadSurfaceMaterials.ASPHALT.settings(),
             settings -> new StairsBlock(ASPHALT.getDefaultState(), settings));
-    public static final Block WORN_ASPHALT = register("worn_asphalt", stone(2f, 5.5f));
-    public static final Block WORN_ASPHALT_SLAB = register("worn_asphalt_slab", stone(2f, 5.5f), SlabBlock::new);
-    public static final Block WORN_ASPHALT_STAIRS = register("worn_asphalt_stairs", stone(2f, 5.5f),
+    public static final Block WORN_ASPHALT = register("worn_asphalt", RoadSurfaceMaterials.WORN_ASPHALT.settings());
+    public static final Block WORN_ASPHALT_SLAB = register("worn_asphalt_slab",
+            RoadSurfaceMaterials.WORN_ASPHALT.settings(), SlabBlock::new);
+    public static final Block WORN_ASPHALT_STAIRS = register("worn_asphalt_stairs",
+            RoadSurfaceMaterials.WORN_ASPHALT.settings(),
             settings -> new StairsBlock(WORN_ASPHALT.getDefaultState(), settings));
     public static final Block WHITE_LINE_ASPHALT = register("white_line_asphalt", stone(2.2f, 6f));
     public static final Block YELLOW_LINE_ASPHALT = register("yellow_line_asphalt", stone(2.2f, 6f));
@@ -231,6 +269,15 @@ public final class ModBlocks {
                 .sounds(BlockSoundGroup.WOOD)
                 .burnable();
         return register(name, settings, WallBlock::new);
+    }
+
+    private static Block registerAsphaltHeight(int height) {
+        return registerAsphaltHeight("asphalt_height_" + height + "_16", height);
+    }
+
+    private static Block registerAsphaltHeight(String name, int height) {
+        return register(name, RoadSurfaceMaterials.ASPHALT.settings().nonOpaque(),
+                settings -> new FixedRoadHeightBlock(height, settings));
     }
 
     private static Block register(String name, AbstractBlock.Settings settings) {

@@ -2,6 +2,7 @@ package net.evarius.tnadditions.marking;
 
 import net.evarius.tnadditions.marking.spline.CatmullRomSpline;
 import net.evarius.tnadditions.marking.spline.CurvePointPreprocessor;
+import net.evarius.tnadditions.marking.geometry.MarkingGeometryCache;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 
@@ -61,6 +62,23 @@ public final class RoadMarkingCoreTest {
         Vec3d offset = offsetQuad.a().add(offsetQuad.b()).add(offsetQuad.c()).add(offsetQuad.d()).multiply(0.25);
         require(offset.subtract(centered).dotProduct(samples.getFirst().normal()) > 0.9,
                 "lateral spline offset was not applied along the normal");
+
+        UUID previewId = UUID.randomUUID();
+        var geometryCache = new MarkingGeometryCache();
+        RoadMarking firstPreview = new RoadMarking(
+                previewId, MarkingTypes.SOLID,
+                List.of(new Vec3d(0, 64, 0), new Vec3d(2, 64, 0)),
+                MarkingStyle.DEFAULT, 1
+        );
+        RoadMarking movedPreview = new RoadMarking(
+                previewId, MarkingTypes.SOLID,
+                List.of(new Vec3d(0, 64, 0), new Vec3d(9, 64, 0)),
+                MarkingStyle.DEFAULT, 1
+        );
+        double firstPreviewLength = geometryCache.get(firstPreview).length();
+        double movedPreviewLength = geometryCache.get(movedPreview).length();
+        require(movedPreviewLength > firstPreviewLength + 5.0,
+                "geometry cache returned a stale hover preview with the same revision");
 
         RoadMarking original = new RoadMarking(
                 UUID.randomUUID(), Identifier.of("tnadditions", "double_dashed"),

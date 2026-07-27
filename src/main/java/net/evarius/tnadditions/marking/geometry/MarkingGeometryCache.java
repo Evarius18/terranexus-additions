@@ -14,13 +14,23 @@ public final class MarkingGeometryCache {
 
     public MarkingGeometry get(RoadMarking marking) {
         Entry current = cache.get(marking.id());
-        if (current != null && current.revision == marking.revision()) return current.geometry;
+        /*
+         * Persisted markings normally change their revision, but hover
+         * previews intentionally reuse one revision while their final control
+         * point follows the crosshair. Comparing the immutable source record
+         * prevents a stale preview without penalizing normal entries: those
+         * hit the identity fast path.
+         */
+        if (current != null
+                && (current.source == marking || current.source.equals(marking))) {
+            return current.geometry;
+        }
         double spacing = Math.clamp(marking.style().width() * 0.5, 0.05, 0.35);
         var curvePoints = CurvePointPreprocessor.roundCorners(
                 marking.controlPoints(), marking.style().cornerRadius());
         var samples = new CatmullRomSpline(curvePoints).sample(spacing);
         MarkingGeometry geometry = MarkingTypes.get(marking.type()).generate(samples, marking.style());
-        cache.put(marking.id(), new Entry(marking.revision(), geometry));
+        cache.put(marking.id(), new Entry(marking, geometry));
         return geometry;
     }
 
@@ -34,6 +44,6 @@ public final class MarkingGeometryCache {
         cache.keySet().retainAll(keep);
     }
 
-    private record Entry(long revision, MarkingGeometry geometry) {
+    private record Entry(RoadMarking source, MarkingGeometry geometry) {
     }
 }
