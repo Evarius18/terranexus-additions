@@ -91,6 +91,7 @@ public final class ModBlocks {
     public static final Block SCHACHTDECKEL_ASPHAL = register("schachtdeckel_asphal",
             stone(2.2f, 6f), GlazedTerracottaBlock::new);
     public static final Block PFLASTERSTEINE = register("pflastersteine", stone(1.8f, 6f));
+    public static final Block KOPFSTEINPFLASTER = register("kopfsteinpflaster", stone(2f, 6f));
 
     // Construction Materials
     public static final Block CONSTRUCTION_SAND = register("construction_sand",
@@ -183,6 +184,12 @@ public final class ModBlocks {
 
     // Drainage & Manholes
     public static final Block GULLY = register("gully",
+            AbstractBlock.Settings.create().strength(4f, 8f).requiresTool().sounds(BlockSoundGroup.METAL).nonOpaque(),
+            GullyBlock::new);
+    public static final Block GULLY_PFLASTER = register("gully_pflaster",
+            AbstractBlock.Settings.create().strength(4f, 8f).requiresTool().sounds(BlockSoundGroup.METAL).nonOpaque(),
+            GullyBlock::new);
+    public static final Block GULLY_KOPFSTEINPFLASTER = register("gully_kopfsteinpflaster",
             AbstractBlock.Settings.create().strength(4f, 8f).requiresTool().sounds(BlockSoundGroup.METAL).nonOpaque(),
             GullyBlock::new);
     public static final Block OBERFLURHYDRANT = register("oberflurhydrant",

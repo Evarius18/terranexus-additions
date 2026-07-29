@@ -32,6 +32,7 @@ public final class ModItemGroups {
                         entries.add(ModBlocks.ASPHALT_MIT_REGENLAUF_SCHACHT);
                         entries.add(ModBlocks.SCHACHTDECKEL_ASPHAL);
                         entries.add(ModBlocks.PFLASTERSTEINE);
+                        entries.add(ModBlocks.KOPFSTEINPFLASTER);
                         entries.add(ModBlocks.CONSTRUCTION_SAND);
                         entries.add(ModBlocks.CRUSHED_STONE);
                         entries.add(ModBlocks.MILLED_ASPHALT);
@@ -62,6 +63,8 @@ public final class ModItemGroups {
                         entries.add(ModBlocks.BRIDGE_STEEL);
                         entries.add(ModBlocks.BRIDGE_EXPANSION_JOINT);
                         entries.add(ModBlocks.GULLY);
+                        entries.add(ModBlocks.GULLY_PFLASTER);
+                        entries.add(ModBlocks.GULLY_KOPFSTEINPFLASTER);
                         entries.add(ModBlocks.OBERFLURHYDRANT);
                         entries.add(ModItems.ROAD_MARKING_EDITOR);
                     }).build());

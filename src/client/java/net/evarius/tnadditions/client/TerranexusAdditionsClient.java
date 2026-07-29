@@ -30,7 +30,9 @@ public class TerranexusAdditionsClient implements ClientModInitializer {
 				ModBlocks.BARKE_GROSS_LICHT,
 				ModBlocks.BAUZAUN,
 				ModBlocks.BAUZAUN_MIT_PLANE,
-				ModBlocks.LEUCHTE
+				ModBlocks.LEUCHTE,
+				ModBlocks.GULLY_PFLASTER,
+				ModBlocks.GULLY_KOPFSTEINPFLASTER
 		);
 	}
 }

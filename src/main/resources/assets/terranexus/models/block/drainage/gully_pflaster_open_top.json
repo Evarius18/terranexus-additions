@@ -1,0 +1,15 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "surface": "terranexus:block/road_surface/pflastersteine",
+    "gully": "terranexus:block/drainage/gully",
+    "particle": "terranexus:block/road_surface/pflastersteine"
+  },
+  "elements": [
+    {"from":[0,14,0],"to":[4,16,16],"faces":{"north":{"texture":"#surface"},"east":{"texture":"#surface"},"south":{"texture":"#surface"},"west":{"texture":"#surface"},"up":{"uv":[0,0,4,16],"texture":"#surface"},"down":{"texture":"#surface"}}},
+    {"from":[12,14,0],"to":[16,16,16],"faces":{"north":{"texture":"#surface"},"east":{"texture":"#surface"},"south":{"texture":"#surface"},"west":{"texture":"#surface"},"up":{"uv":[12,0,16,16],"texture":"#surface"},"down":{"texture":"#surface"}}},
+    {"from":[4,14,0],"to":[12,16,3],"faces":{"north":{"texture":"#surface"},"east":{"texture":"#surface"},"south":{"texture":"#surface"},"west":{"texture":"#surface"},"up":{"uv":[4,0,12,3],"texture":"#surface"},"down":{"texture":"#surface"}}},
+    {"from":[4,14,13],"to":[12,16,16],"faces":{"north":{"texture":"#surface"},"east":{"texture":"#surface"},"south":{"texture":"#surface"},"west":{"texture":"#surface"},"up":{"uv":[4,13,12,16],"texture":"#surface"},"down":{"texture":"#surface"}}},
+    {"from":[0,0,14],"to":[16,16,16],"faces":{"north":{"uv":[0,0,16,16],"texture":"#gully"},"east":{"uv":[14,0,16,16],"texture":"#gully"},"south":{"uv":[0,0,16,16],"texture":"#gully"},"west":{"uv":[0,0,2,16],"texture":"#gully"},"up":{"uv":[0,0,16,2],"texture":"#gully"},"down":{"uv":[0,14,16,16],"texture":"#gully"}}}
+  ]
+}

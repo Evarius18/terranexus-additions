@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "terranexus:gully",
+    "terranexus:pflastersteine"
+  ],
+  "result": {
+    "id": "terranexus:gully_pflaster",
+    "count": 1
+  }
+}
