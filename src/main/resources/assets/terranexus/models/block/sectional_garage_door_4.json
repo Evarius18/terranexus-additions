@@ -1,0 +1,1 @@
+{"textures":{"panel":"minecraft:block/iron_block","frame":"minecraft:block/polished_blackstone","particle":"minecraft:block/iron_block"},"elements":[{"from":[0,13,0],"to":[16,16,16],"faces":{"up":{"texture":"#panel"},"down":{"texture":"#panel"},"north":{"texture":"#frame"},"south":{"texture":"#frame"},"east":{"texture":"#frame"},"west":{"texture":"#frame"}}}]}

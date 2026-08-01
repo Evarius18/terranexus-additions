@@ -1,0 +1,1 @@
+{"multipart":[{"when":{"facing":"north"},"apply":{"model":"terranexus:block/diorite_chunk"}},{"when":{"facing":"east"},"apply":{"model":"terranexus:block/diorite_chunk","y":90}},{"when":{"facing":"south"},"apply":{"model":"terranexus:block/diorite_chunk","y":180}},{"when":{"facing":"west"},"apply":{"model":"terranexus:block/diorite_chunk","y":270}}]}

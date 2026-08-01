@@ -1,0 +1,1 @@
+{"type":"minecraft:crafting_shaped","category":"redstone","pattern":["IGI","IRI","III"],"key":{"I":"minecraft:iron_ingot","G":"minecraft:glass_pane","R":"minecraft:redstone"},"result":{"id":"terranexus:sectional_garage_door","count":2}}

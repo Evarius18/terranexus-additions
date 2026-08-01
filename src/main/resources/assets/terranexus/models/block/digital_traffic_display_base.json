@@ -1,0 +1,1 @@
+{"textures":{"case":"minecraft:block/black_concrete","particle":"minecraft:block/black_concrete"},"elements":[{"from":[1,2,13],"to":[15,14,16],"faces":{"north":{"texture":"#display"},"south":{"texture":"#case"},"east":{"texture":"#case"},"west":{"texture":"#case"},"up":{"texture":"#case"},"down":{"texture":"#case"}}}]}

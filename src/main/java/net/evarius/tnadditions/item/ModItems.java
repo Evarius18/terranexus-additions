@@ -17,6 +17,15 @@ public final class ModItems {
             EDITOR_KEY,
             new Item(new Item.Settings().registryKey(EDITOR_KEY).maxCount(1))
     );
+    public static final Item GARAGE_KEY = register("garage_key", false);
+    public static final Item GARAGE_REMOTE = register("garage_remote", true);
+
+    private static Item register(String path, boolean remote) {
+        Identifier id = Identifier.of(ModBlocks.LEGACY_NAMESPACE, path);
+        RegistryKey<Item> key = RegistryKey.of(RegistryKeys.ITEM, id);
+        return Registry.register(Registries.ITEM, key,
+                new GarageControllerItem(new Item.Settings().registryKey(key).maxCount(1), remote));
+    }
 
     public static void register() {
         // Class initialization performs registration.

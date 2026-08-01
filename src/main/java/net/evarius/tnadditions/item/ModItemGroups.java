@@ -66,6 +66,9 @@ public final class ModItemGroups {
                         entries.add(ModBlocks.GULLY_PFLASTER);
                         entries.add(ModBlocks.GULLY_KOPFSTEINPFLASTER);
                         entries.add(ModBlocks.OBERFLURHYDRANT);
+                        ModBlocks.INFRASTRUCTURE.forEach(entries::add);
+                        entries.add(ModItems.GARAGE_KEY);
+                        entries.add(ModItems.GARAGE_REMOTE);
                         entries.add(ModItems.ROAD_MARKING_EDITOR);
                     }).build());
 
@@ -98,6 +101,7 @@ public final class ModItemGroups {
             entries.add(ModBlocks.MANGROVE_LOG_WALL);
             entries.add(ModBlocks.CHERRY_LOG_WALL);
             entries.add(ModBlocks.PALE_OAK_LOG_WALL);
+            ModBlocks.DECORATION.forEach(entries::add);
         });
         TerraNexusAdditions.LOGGER.info(
                 "Registered TerraNexus road construction, construction barriers and natural-block entries"

@@ -1,0 +1,1 @@
+{"type":"minecraft:crafting_shaped","category":"redstone","pattern":[" R "," Y "," G "],"key":{"R":"minecraft:redstone_torch","Y":"minecraft:yellow_stained_glass","G":"minecraft:green_stained_glass"},"result":{"id":"terranexus:traffic_light","count":1}}

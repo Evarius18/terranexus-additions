@@ -1,0 +1,1 @@
+{"multipart":[{"when":{"facing":"north"},"apply":{"model":"terranexus:block/stone_chunks"}},{"when":{"facing":"east"},"apply":{"model":"terranexus:block/stone_chunks","y":90}},{"when":{"facing":"south"},"apply":{"model":"terranexus:block/stone_chunks","y":180}},{"when":{"facing":"west"},"apply":{"model":"terranexus:block/stone_chunks","y":270}}]}

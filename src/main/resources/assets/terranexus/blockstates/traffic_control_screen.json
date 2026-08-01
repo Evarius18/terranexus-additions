@@ -1,0 +1,1 @@
+{"variants":{"facing=north":{"model":"terranexus:block/traffic_control_screen"},"facing=east":{"model":"terranexus:block/traffic_control_screen","y":90},"facing=south":{"model":"terranexus:block/traffic_control_screen","y":180},"facing=west":{"model":"terranexus:block/traffic_control_screen","y":270}}}

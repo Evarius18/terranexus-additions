@@ -3,6 +3,10 @@ package net.evarius.tnadditions;
 import net.evarius.tnadditions.block.ModBlocks;
 import net.evarius.tnadditions.config.GuardrailOxidationConfig;
 import net.evarius.tnadditions.config.RoadMarkingSupportConfig;
+import net.evarius.tnadditions.config.InfrastructureConfig;
+import net.evarius.tnadditions.traffic.TrafficControlCommands;
+import net.evarius.tnadditions.traffic.TrafficControlNetworking;
+import net.evarius.tnadditions.garage.GarageCommands;
 import net.evarius.tnadditions.item.ModItemGroups;
 import net.evarius.tnadditions.item.ModItems;
 import net.evarius.tnadditions.marking.MarkingTypes;
@@ -25,6 +29,7 @@ public class TerraNexusAdditions implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		InfrastructureConfig.load();
 		GuardrailOxidationConfig.load();
 		RoadMarkingSupportConfig.load();
 		ModBlocks.registerModBlocks();
@@ -32,6 +37,9 @@ public class TerraNexusAdditions implements ModInitializer {
 		MarkingTypes.registerDefaults();
 		RoadMarkingNetworking.register();
 		RoadMarkingSupportManager.register();
+		TrafficControlCommands.register();
+		TrafficControlNetworking.register();
+		GarageCommands.register();
 		ModItemGroups.registerItemGroups();
 		LOGGER.info("TerraNexus road construction additions initialized");
 	}

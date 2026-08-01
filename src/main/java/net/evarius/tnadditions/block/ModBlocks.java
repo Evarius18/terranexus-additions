@@ -11,6 +11,12 @@ import net.evarius.tnadditions.block.custom.LeitpfostenBlock;
 import net.evarius.tnadditions.block.custom.OxidizingGuardrailBlock;
 import net.evarius.tnadditions.block.custom.RoadFurnitureBlock;
 import net.evarius.tnadditions.block.custom.TemporaryBarrierBlock;
+import net.evarius.tnadditions.block.custom.AnimatedGarageDoorBlock;
+import net.evarius.tnadditions.block.custom.DigitalTrafficDisplayBlock;
+import net.evarius.tnadditions.block.custom.DirectionalDecorationBlock;
+import net.evarius.tnadditions.block.custom.IndustrialLadderBlock;
+import net.evarius.tnadditions.block.custom.TrafficLightBlock;
+import net.evarius.tnadditions.block.custom.TrafficControlConsoleBlock;
 import net.evarius.tnadditions.block.material.RoadSurfaceMaterials;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
@@ -195,6 +201,35 @@ public final class ModBlocks {
     public static final Block OBERFLURHYDRANT = register("oberflurhydrant",
             AbstractBlock.Settings.create().strength(4f, 8f).requiresTool().sounds(BlockSoundGroup.METAL).nonOpaque(),
             HydrantBlock::new);
+
+    // Infrastructure, traffic control and natural decoration
+    public static final Block SECTIONAL_GARAGE_DOOR = register("sectional_garage_door",
+            AbstractBlock.Settings.create().strength(4f,8f).requiresTool().sounds(BlockSoundGroup.METAL).nonOpaque(), AnimatedGarageDoorBlock::new);
+    public static final Block DIGITAL_TRAFFIC_DISPLAY = register("digital_traffic_display",
+            AbstractBlock.Settings.create().strength(3f,7f).requiresTool().sounds(BlockSoundGroup.METAL).nonOpaque()
+                    .luminance(s -> s.get(DigitalTrafficDisplayBlock.MODE)==net.evarius.tnadditions.traffic.TrafficDisplayMode.OFF?0:8), DigitalTrafficDisplayBlock::new);
+    public static final Block TRAFFIC_LIGHT = register("traffic_light",
+            AbstractBlock.Settings.create().strength(3f,7f).requiresTool().sounds(BlockSoundGroup.METAL).nonOpaque()
+                    .luminance(s -> s.get(TrafficLightBlock.ASPECT)==net.evarius.tnadditions.traffic.TrafficSignalAspect.OFF?0:8), TrafficLightBlock::new);
+    public static final Block TRAFFIC_CONTROL_PC = register("traffic_control_pc",
+            AbstractBlock.Settings.create().strength(2.5f, 6f).requiresTool().sounds(BlockSoundGroup.METAL).nonOpaque(),
+            TrafficControlConsoleBlock::new);
+    public static final Block TRAFFIC_CONTROL_SCREEN = register("traffic_control_screen",
+            AbstractBlock.Settings.create().strength(2.5f, 6f).requiresTool().sounds(BlockSoundGroup.METAL).nonOpaque()
+                    .luminance(state -> 3), settings -> new TrafficControlConsoleBlock(settings, true));
+    public static final Block INDUSTRIAL_LADDER_RUSTED = register("industrial_ladder_rusted",
+            AbstractBlock.Settings.create().strength(2f,4f).requiresTool().sounds(BlockSoundGroup.METAL).nonOpaque(), IndustrialLadderBlock::new);
+    private static Block decor(String id,double x1,double y1,double z1,double x2,double y2,double z2){return register(id,stone(1.5f,6f).nonOpaque(),s->new DirectionalDecorationBlock(s,x1,y1,z1,x2,y2,z2));}
+    public static final Block ANDESITE_BOULDER=decor("andesite_boulder",2,0,2,15,7,15), ANDESITE_PLATES=decor("andesite_plates",1,0,1,15,2,15),
+            COBBLESTONE_CHUNK=decor("cobblestone_chunk",7,0,2,15,4,10), COBBLESTONE_CHUNKS=decor("cobblestone_chunks",1,0,1,15,4,15),
+            DEEPSLATE_BOULDER=decor("deepslate_boulder",2,0,2,15,7,15), DEEPSLATE_PLATES=decor("deepslate_plates",1,0,1,15,2,15),
+            DIORITE_BOULDER=decor("diorite_boulder",2,0,2,15,7,15), DIORITE_CHUNK=decor("diorite_chunk",1,0,7,9,3,15),
+            DIORITE_CHUNKS=decor("diorite_chunks",1,0,1,15,3,15), DIORITE_PLATES=decor("diorite_plates",1,0,1,15,2,15),
+            COARSE_DIRT_BOULDER=decor("coarse_dirt_boulder",2,0,2,15,7,15), STONE_BOULDER=decor("stone_boulder",2,0,2,15,7,15),
+            STONE_PLATES=decor("stone_plates",1,0,1,15,2,15), STONE_CHUNK=decor("stone_chunk",1,0,7,9,3,15), STONE_CHUNKS=decor("stone_chunks",1,0,1,15,3,15);
+    public static final List<Block> INFRASTRUCTURE = List.of(SECTIONAL_GARAGE_DOOR,DIGITAL_TRAFFIC_DISPLAY,TRAFFIC_LIGHT,
+            TRAFFIC_CONTROL_PC,TRAFFIC_CONTROL_SCREEN,INDUSTRIAL_LADDER_RUSTED);
+    public static final List<Block> DECORATION = List.of(ANDESITE_BOULDER,ANDESITE_PLATES,COBBLESTONE_CHUNK,COBBLESTONE_CHUNKS,DEEPSLATE_BOULDER,DEEPSLATE_PLATES,DIORITE_BOULDER,DIORITE_CHUNK,DIORITE_CHUNKS,DIORITE_PLATES,COARSE_DIRT_BOULDER,STONE_BOULDER,STONE_PLATES,STONE_CHUNK,STONE_CHUNKS);
 
 
     // Logs as Walls

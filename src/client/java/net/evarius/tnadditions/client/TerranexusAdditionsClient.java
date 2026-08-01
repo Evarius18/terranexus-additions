@@ -4,6 +4,7 @@ import net.evarius.tnadditions.block.ModBlocks;
 import net.evarius.tnadditions.client.marking.ClientRoadMarkings;
 import net.evarius.tnadditions.client.marking.RoadMarkingEditorControls;
 import net.evarius.tnadditions.client.marking.RoadMarkingRenderer;
+import net.evarius.tnadditions.client.traffic.TrafficControlClient;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
@@ -13,6 +14,7 @@ public class TerranexusAdditionsClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		ClientRoadMarkings.registerNetworking();
+		TrafficControlClient.register();
 		RoadMarkingEditorControls.register();
 		WorldRenderEvents.LAST.register(RoadMarkingRenderer::render);
 		BlockRenderLayerMap.putBlocks(
@@ -31,6 +33,11 @@ public class TerranexusAdditionsClient implements ClientModInitializer {
 				ModBlocks.BAUZAUN,
 				ModBlocks.BAUZAUN_MIT_PLANE,
 				ModBlocks.LEUCHTE,
+				ModBlocks.SECTIONAL_GARAGE_DOOR,
+				ModBlocks.DIGITAL_TRAFFIC_DISPLAY,
+				ModBlocks.TRAFFIC_LIGHT,
+				ModBlocks.TRAFFIC_CONTROL_SCREEN,
+				ModBlocks.INDUSTRIAL_LADDER_RUSTED,
 				ModBlocks.GULLY_PFLASTER,
 				ModBlocks.GULLY_KOPFSTEINPFLASTER
 		);

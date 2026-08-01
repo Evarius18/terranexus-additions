@@ -1,1 +1,27 @@
-{"replace":false,"values":["terranexus:asphalt","terranexus:asphalt_layer","terranexus:asphalt_height_2_16","terranexus:asphalt_height_3_16","terranexus:asphalt_height_4_16","terranexus:asphalt_height_5_16","terranexus:asphalt_height_6_16","terranexus:asphalt_height_7_16","terranexus:asphalt_slab","terranexus:asphalt_height_9_16","terranexus:asphalt_height_10_16","terranexus:asphalt_height_11_16","terranexus:asphalt_height_12_16","terranexus:asphalt_height_13_16","terranexus:asphalt_height_14_16","terranexus:asphalt_height_15_16","terranexus:asphalt_stairs","terranexus:worn_asphalt","terranexus:worn_asphalt_slab","terranexus:worn_asphalt_stairs","terranexus:white_line_asphalt","terranexus:yellow_line_asphalt","terranexus:tar","terranexus:guardrail","terranexus:lightly_rusted_guardrail","terranexus:heavily_rusted_guardrail","terranexus:guardrail_end","terranexus:bridge_guardrail","terranexus:bridge_concrete","terranexus:bridge_concrete_slab","terranexus:bridge_steel","terranexus:bridge_expansion_joint","terranexus:guardrail_center_post","terranexus:lightly_rusted_guardrail_center_post","terranexus:heavily_rusted_guardrail_center_post","terranexus:guardrail_without_posts","terranexus:lightly_rusted_guardrail_without_posts","terranexus:heavily_rusted_guardrail_without_posts","terranexus:guardrail_end_left","terranexus:lightly_rusted_guardrail_end_left","terranexus:heavily_rusted_guardrail_end_left","terranexus:guardrail_end_right","terranexus:lightly_rusted_guardrail_end_right","terranexus:heavily_rusted_guardrail_end_right","terranexus:barke","terranexus:barke_fuss","terranexus:barke_licht","terranexus:barke_gross","terranexus:barke_gross_licht","terranexus:bauzaun","terranexus:bauzaun_mit_plane","terranexus:leuchte","terranexus:leitpfosten","terranexus:leitpfosten_gelb","terranexus:leitpfosten_wildwarner","terranexus:schachtdeckel_asphal","terranexus:pflastersteine","terranexus:kopfsteinpflaster","terranexus:oberflurhydrant","terranexus:gully","terranexus:gully_pflaster","terranexus:gully_kopfsteinpflaster","terranexus:asphalt_mit_regenlauf","terranexus:asphalt_mit_regenlauf_schacht"]}
+{
+  "replace": false,
+  "values": [
+    "terranexus:asphalt", "terranexus:asphalt_layer", "terranexus:asphalt_height_2_16", "terranexus:asphalt_height_3_16",
+    "terranexus:asphalt_height_4_16", "terranexus:asphalt_height_5_16", "terranexus:asphalt_height_6_16", "terranexus:asphalt_height_7_16",
+    "terranexus:asphalt_slab", "terranexus:asphalt_height_9_16", "terranexus:asphalt_height_10_16", "terranexus:asphalt_height_11_16",
+    "terranexus:asphalt_height_12_16", "terranexus:asphalt_height_13_16", "terranexus:asphalt_height_14_16", "terranexus:asphalt_height_15_16",
+    "terranexus:asphalt_stairs", "terranexus:worn_asphalt", "terranexus:worn_asphalt_slab", "terranexus:worn_asphalt_stairs",
+    "terranexus:white_line_asphalt", "terranexus:yellow_line_asphalt", "terranexus:tar", "terranexus:guardrail",
+    "terranexus:lightly_rusted_guardrail", "terranexus:heavily_rusted_guardrail", "terranexus:guardrail_end", "terranexus:bridge_guardrail",
+    "terranexus:bridge_concrete", "terranexus:bridge_concrete_slab", "terranexus:bridge_steel", "terranexus:bridge_expansion_joint",
+    "terranexus:guardrail_center_post", "terranexus:lightly_rusted_guardrail_center_post", "terranexus:heavily_rusted_guardrail_center_post",
+    "terranexus:guardrail_without_posts", "terranexus:lightly_rusted_guardrail_without_posts", "terranexus:heavily_rusted_guardrail_without_posts",
+    "terranexus:guardrail_end_left", "terranexus:lightly_rusted_guardrail_end_left", "terranexus:heavily_rusted_guardrail_end_left",
+    "terranexus:guardrail_end_right", "terranexus:lightly_rusted_guardrail_end_right", "terranexus:heavily_rusted_guardrail_end_right",
+    "terranexus:barke", "terranexus:barke_fuss", "terranexus:barke_licht", "terranexus:barke_gross", "terranexus:barke_gross_licht",
+    "terranexus:bauzaun", "terranexus:bauzaun_mit_plane", "terranexus:leuchte", "terranexus:leitpfosten", "terranexus:leitpfosten_gelb",
+    "terranexus:leitpfosten_wildwarner", "terranexus:schachtdeckel_asphal", "terranexus:pflastersteine", "terranexus:kopfsteinpflaster",
+    "terranexus:oberflurhydrant", "terranexus:gully", "terranexus:gully_pflaster", "terranexus:gully_kopfsteinpflaster",
+    "terranexus:asphalt_mit_regenlauf", "terranexus:asphalt_mit_regenlauf_schacht", "terranexus:sectional_garage_door",
+    "terranexus:digital_traffic_display", "terranexus:traffic_light", "terranexus:traffic_control_pc", "terranexus:traffic_control_screen",
+    "terranexus:industrial_ladder_rusted", "terranexus:andesite_boulder", "terranexus:andesite_plates", "terranexus:cobblestone_chunk",
+    "terranexus:cobblestone_chunks", "terranexus:deepslate_boulder", "terranexus:deepslate_plates", "terranexus:diorite_boulder",
+    "terranexus:diorite_chunk", "terranexus:diorite_chunks", "terranexus:diorite_plates", "terranexus:coarse_dirt_boulder",
+    "terranexus:stone_boulder", "terranexus:stone_plates", "terranexus:stone_chunk", "terranexus:stone_chunks"
+  ]
+}
